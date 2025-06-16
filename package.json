@@ -1,10 +1,11 @@
 {
-  "name": "claudepod-v2",
+  "name": "claude-pod-fly-v2",
   "version": "1.0.0",
   "description": "AI Development Platform with Claude Code",
   "scripts": {
     "start": "cd backend && npm start",
-    "install": "cd backend && npm install"
+    "install": "cd backend && npm install",
+    "postinstall": "cd backend && npm install"
   },
   "engines": {
     "node": ">=18.0.0"
