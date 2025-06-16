@@ -1,0 +1,66 @@
+{
+  "name": "AI Development Workspace",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "USER_ID": "${localEnv:USER_ID}",
+      "WORKSPACE_ID": "${localEnv:WORKSPACE_ID}"
+    }
+  },
+  
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+
+  "postCreateCommand": [
+    "bash",
+    ".devcontainer/setup.sh"
+  ],
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash",
+        "git.autofetch": true,
+        "git.autofetchPeriod": 30,
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 1000
+      },
+      "extensions": [
+        "ms-vscode.vscode-typescript-next",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        "GitHub.copilot"
+      ]
+    }
+  },
+
+  "forwardPorts": [3000, 3001, 8080],
+  "portsAttributes": {
+    "3000": {
+      "label": "React Development Server",
+      "onAutoForward": "notify"
+    }
+  },
+
+  "remoteEnv": {
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}",
+    "WORKSPACE_ID": "${localEnv:WORKSPACE_ID}",
+    "PROJECT_ID": "${localEnv:PROJECT_ID}",
+    "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
+  },
+
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopContainer",
+
+  "initializeCommand": "echo 'Initializing AI Development Workspace...'",
+  "postStartCommand": "bash .devcontainer/auto-sync.sh &",
+  
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
+  ]
+}
