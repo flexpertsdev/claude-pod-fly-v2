@@ -1,0 +1,9 @@
+{
+  "workspaceId": "template",
+  "projectId": "template",
+  "created": "2024-01-01T00:00:00Z",
+  "status": "template",
+  "platform": "ai-dev-workspace",
+  "version": "1.0.0",
+  "description": "This is a template workspace. It will be customized when a new workspace is created."
+}
